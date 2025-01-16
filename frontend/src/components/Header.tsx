@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,21 +8,31 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { User } from 'lucide-react'
+} from "@/components/ui/dropdown-menu";
+import { User } from "lucide-react";
 
 export default function Header() {
   return (
     <header className="bg-green-50 py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-green-700">
-          Take Back
+          Ecocycle
         </Link>
         <nav>
           <ul className="flex space-x-4">
-            {['Home', 'Dashboard', 'Materials', 'Marketplace', 'Community Forum', 'Resources'].map((item) => (
+            {[
+              "Home",
+              "Dashboard",
+              "Materials",
+              "Marketplace",
+              "Community Forum",
+              "Resources",
+            ].map((item) => (
               <li key={item}>
-                <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="text-green-700 hover:text-green-500">
+                <Link
+                  href={`/${item.toLowerCase().replace(" ", "-")}`}
+                  className="text-green-700 hover:text-green-500"
+                >
                   {item}
                 </Link>
               </li>
@@ -64,6 +74,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
-

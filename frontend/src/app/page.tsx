@@ -14,7 +14,7 @@ export default function Home() {
         <Hero />
         <KeyFeatures />
         <Testimonials />
-        <ImpactStatistics />
+        {/* <ImpactStatistics /> */}
         <JoinCommunity />
       </main>
       <Footer />

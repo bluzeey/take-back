@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,9 +7,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,24 +17,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Material } from '@/app/materials/page'
-import { MoreHorizontal, Search } from 'lucide-react'
+} from "@/components/ui/dropdown-menu";
+import { Material } from "@/app/materials/page";
+import { MoreHorizontal, Search } from "lucide-react";
 
 interface MaterialsListProps {
-  materials: Material[]
-  onEdit: (material: Material) => void
-  onDelete: (id: string) => void
+  materials: Material[];
+  onEdit: (material: Material) => void;
+  onDelete: (id: string) => void;
 }
 
-export default function MaterialsList({ materials, onEdit, onDelete }: MaterialsListProps) {
-  const [searchTerm, setSearchTerm] = useState('')
+export default function MaterialsList({
+  materials,
+  onEdit,
+  onDelete,
+}: MaterialsListProps) {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredMaterials = materials.filter(material =>
-    material.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    material.trackingId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    material.status.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredMaterials = materials.filter(
+    (material) =>
+      material.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      material.trackingId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      material.status.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-4">
@@ -64,7 +69,7 @@ export default function MaterialsList({ materials, onEdit, onDelete }: Materials
             <TableRow key={material.id}>
               <TableCell className="font-medium">{material.name}</TableCell>
               <TableCell>{material.description}</TableCell>
-              <TableCell>{material.trackingId}</TableCell>
+              <TableCell>{material.tracking_id}</TableCell>
               <TableCell>{material.status}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
@@ -76,12 +81,18 @@ export default function MaterialsList({ materials, onEdit, onDelete }: Materials
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => onEdit(material)}>Edit</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => onEdit(material)}>
+                      Edit
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => {
-                        if (window.confirm('Are you sure you want to delete this material?')) {
-                          onDelete(material.id)
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete this material?"
+                          )
+                        ) {
+                          onDelete(material.id);
                         }
                       }}
                       className="text-red-600"
@@ -96,6 +107,5 @@ export default function MaterialsList({ materials, onEdit, onDelete }: Materials
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
-
