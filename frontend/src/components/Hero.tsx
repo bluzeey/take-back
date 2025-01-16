@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -10,16 +10,24 @@ export default function Hero() {
             Transform Recycling into Opportunities!
           </h1>
           <p className="text-xl text-green-700 mb-6">
-            Join our platform to connect with companies that take back materials and track your recycling impact.
+            Join our platform to connect with companies that take back materials
+            and track your recycling impact.
           </p>
           <div className="space-x-4">
-            <Button className="bg-green-700 hover:bg-green-600 text-white">Get Started</Button>
-            <Button variant="outline" className="text-green-700 border-green-700 hover:bg-green-100">Learn More</Button>
+            <Button className="bg-green-700 hover:bg-green-600 text-white">
+              Get Started
+            </Button>
+            <Button
+              variant="outline"
+              className="text-green-700 border-green-700 hover:bg-green-100"
+            >
+              Learn More
+            </Button>
           </div>
         </div>
         <div className="md:w-1/2">
           <Image
-            src="/placeholder.svg?height=400&width=400"
+            src="/images/heroImage.png"
             alt="Recycling Illustration"
             width={400}
             height={400}
@@ -28,6 +36,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
