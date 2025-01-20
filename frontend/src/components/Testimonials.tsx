@@ -3,14 +3,14 @@ import Image from "next/image";
 const testimonials = [
   {
     quote:
-      "Take Back has revolutionized how we handle our recyclables. It's user-friendly and impactful!",
+      "Ecocycle has revolutionized how we handle our recyclables. It's user-friendly and impactful!",
     name: "Sam Johnson",
     role: "Eco-Enthusiast",
     image: "/images/testimonials/1.png",
   },
   {
     quote:
-      "As a business owner, Take Back has helped us connect with eco-conscious consumers easily.",
+      "As a business owner, Ecocycle has helped us connect with eco-conscious consumers easily.",
     name: "Michael Chen",
     role: "Green Business Owner",
     image: "/images/testimonials/2.png",
@@ -20,7 +20,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="py-20 bg-green-50">
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-green-800 mb-12">
           What Our Users Say
         </h2>

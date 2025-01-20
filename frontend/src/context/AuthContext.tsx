@@ -9,12 +9,34 @@ import {
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { Token, User } from "@/lib/definitions";
 
-const AuthContext = createContext(null);
+interface AuthContextData {
+  user: any; // Assuming `user` can be `null`, or define its type if known
+  authTokens: Token | null;
+  registerUser: (userData: any) => Promise<{ success: boolean; errors?: any }>;
+  loginUser: (credentials: {
+    email: string;
+    password: string;
+  }) => Promise<void>;
+  logoutUser: () => void;
+  loading: boolean;
+}
 
-export const AuthProvider = ({ children }) => {
+const defaultAuthContext: AuthContextData = {
+  user: null, // Assuming `user` can be `null`, or define its type if known
+  authTokens: null,
+  registerUser: async () => ({ success: false }), // Default async function
+  loginUser: async () => {},
+  logoutUser: () => {},
+  loading: false,
+};
+
+const AuthContext = createContext<AuthContextData>(defaultAuthContext);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState(null);
-  const [authTokens, setAuthTokens] = useState(null);
+  const [authTokens, setAuthTokens] = useState<Token | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -52,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [authTokens]);
 
-  const registerUser = async (userData) => {
+  const registerUser = async (userData: User) => {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/register/", {
         method: "POST",
@@ -145,7 +167,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const REFRESH_INTERVAL = 1000 * 60 * 4; // 4 minutes
-    let interval;
+    let interval: NodeJS.Timeout | undefined;
 
     if (authTokens) {
       interval = setInterval(() => {

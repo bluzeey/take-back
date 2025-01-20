@@ -3,5 +3,18 @@ export interface User {
   username: string;
   email: string;
   profile_picture?: string; // Optional property if it may not be always present
-  points_balance?: number; // Optional for user's points balance based on your implementation
+  points?: number; // Optional for user's points balance based on your implementation
+}
+
+export interface Token {
+  access: string;
+  refresh: string;
+}
+
+export interface Material {
+  id: string;
+  name: string;
+  description: string;
+  tracking_id: string;
+  status: "In Tracking" | "Recycled" | "Pending Pickup";
 }

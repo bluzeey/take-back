@@ -17,7 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z
   .object({

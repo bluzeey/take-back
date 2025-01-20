@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SearchAndFilters from "@/components/SearchAndFilters";
-import MaterialListings from "@/components/MaterialListings";
-import CreateListingModal from "@/components/CreateListingModal";
+import SearchAndFilters from "@/components/marketplace/SearchAndFilters";
+import MaterialListings from "@/components/marketplace/MaterialListings";
+import CreateListingModal from "@/components/marketplace/CreateListingModal";
 import { Button } from "@/components/ui/button";
 
 export interface Material {

@@ -16,7 +16,7 @@ export default function RegisterPage() {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center text-green-800 mb-8">
-          Join the Take Back Community!
+          Join the Ecocycle Community!
         </h1>
         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
           <RegistrationForm />
@@ -47,9 +47,9 @@ export default function RegisterPage() {
             <div className="bg-white p-8 rounded-lg max-w-md">
               <h2 className="text-2xl font-bold mb-4">Registration Help</h2>
               <p className="mb-4">
-                If you&apos;re experiencing issues with registration, please
-                contact our support team at support@takeback.com or call us at
-                1-800-TAKEBACK.
+                If you're experiencing issues with registration, please contact
+                our support team at support@takeback.com or call us at
+                1-800-ECOCYCLE.
               </p>
               <Button onClick={() => setShowHelp(false)}>Close</Button>
             </div>

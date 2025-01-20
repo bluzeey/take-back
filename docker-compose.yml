@@ -1,11 +1,11 @@
 services:
   backend:
     build:
-      context: ./backend
+      context: ./backend/backend
     ports:
       - "8000:8000"
     env_file:
-      - ./backend/.env
+      - ./backend/backend/.env
     depends_on:
       - db
 

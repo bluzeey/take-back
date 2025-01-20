@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
+export function middleware(request: {
+  cookies: { get: (arg0: string) => any };
+  nextUrl: { pathname: string };
+  url: string | URL | undefined;
+}) {
   const isAuthenticated = request.cookies.get("auth_token");
   console.log(isAuthenticated);
 

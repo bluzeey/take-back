@@ -10,19 +10,12 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function DashboardPage() {
   const { user } = useAuth();
-  console.log(user); // Retrieve user from context
-
-  // Early return if user is not set
-  if (!user) {
-    return null;
-  }
-
   return (
     <div className="flex flex-col min-h-screen bg-green-50">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-green-800 mb-8">
-          {user && user.username}
+          Welcome, John Doe!
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">

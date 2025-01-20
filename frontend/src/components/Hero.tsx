@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="bg-green-100 py-20">
-      <div className="container mx-auto max-w-7xl px-4 flex flex-col md:flex-row items-center gap-8">
+      <div className="container mx-auto max-w-7xl w-full  px-4 flex flex-col md:flex-row items-center gap-8">
         <div className="md:w-1/2 mb-8 md:mb-0">
           <h1 className="text-4xl md:text-5xl font-bold text-green-800 mb-4">
             Transform Recycling into Opportunities!
@@ -25,13 +25,13 @@ export default function Hero() {
             </Button>
           </div>
         </div>
-        <div className="md:w-1/2">
+        <div className="w-full md:w-3/4">
           <Image
             src="/images/hero/image.png"
             alt="Recycling Illustration"
             width={400}
             height={400}
-            className="rounded-lg shadow-lg"
+            className="rounded-lg shadow-lg w-full "
           />
         </div>
       </div>

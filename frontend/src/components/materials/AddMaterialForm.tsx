@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Material } from "@/app/materials/page";
+import { Material } from "@/lib/definitions";
 import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
@@ -65,7 +66,7 @@ export default function AddMaterialForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authTokens.access}`,
+          Authorization: `Bearer ${authTokens?.access}`,
         },
         body: JSON.stringify({
           ...values,
@@ -85,7 +86,7 @@ export default function AddMaterialForm({
       // Show success message
       setMessage({ text: "Material added successfully!", type: "success" });
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setMessage({ text: error.message || "An error occurred", type: "error" });
     }
