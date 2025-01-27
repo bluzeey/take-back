@@ -28,7 +28,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root1234
     ports:
-      - "5432:5432" # Expose PostgreSQL port for external connections if needed
+      - "5001:5001" # Expose PostgreSQL port for external connections if needed
 
 volumes:
   postgres_data:
