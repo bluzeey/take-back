@@ -86,9 +86,14 @@ export default function AddMaterialForm({
       // Show success message
       setMessage({ text: "Material added successfully!", type: "success" });
       form.reset();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      setMessage({ text: error.message || "An error occurred", type: "error" });
+      if (error instanceof Error) {
+        setMessage({
+          text: error.message || "An error occurred",
+          type: "error",
+        });
+      }
     }
   };
 

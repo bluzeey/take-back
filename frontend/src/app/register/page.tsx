@@ -47,8 +47,8 @@ export default function RegisterPage() {
             <div className="bg-white p-8 rounded-lg max-w-md">
               <h2 className="text-2xl font-bold mb-4">Registration Help</h2>
               <p className="mb-4">
-                If you're experiencing issues with registration, please contact
-                our support team at support@takeback.com or call us at
+                If you&apos;re experiencing issues with registration, please
+                contact our support team at support@takeback.com or call us at
                 1-800-ECOCYCLE.
               </p>
               <Button onClick={() => setShowHelp(false)}>Close</Button>

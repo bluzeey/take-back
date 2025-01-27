@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -13,53 +12,60 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
+} from "@/components/ui/form";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Appointment } from '@/app/schedule/page'
+} from "@/components/ui/select";
+import { Appointment } from "@/app/schedule/page";
 
 const formSchema = z.object({
   date: z.string(),
   time: z.string(),
-  type: z.enum(['Pickup', 'Drop-off']),
-  material: z.string().min(1, { message: 'Please select a material.' }),
-  location: z.string().min(1, { message: 'Please enter a location.' }),
-  status: z.enum(['Confirmed', 'Pending', 'Completed']),
+  type: z.enum(["Pickup", "Drop-off"]),
+  material: z.string().min(1, { message: "Please select a material." }),
+  location: z.string().min(1, { message: "Please enter a location." }),
+  status: z.enum(["Confirmed", "Pending", "Completed"]),
   notes: z.string().optional(),
-})
+});
 
 interface ScheduleFormProps {
-  isOpen: boolean
-  onClose: () => void
-  onSubmit: (appointment: Appointment) => void
-  initialData?: Appointment | null
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (appointment: Appointment) => void;
+  initialData?: Appointment | null;
 }
 
-export default function ScheduleForm({ isOpen, onClose, onSubmit, initialData }: ScheduleFormProps) {
+export default function ScheduleForm({
+  isOpen,
+  onClose,
+  onSubmit,
+  initialData,
+}: ScheduleFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: initialData ? initialData.date.toISOString().split('T')[0] : '',
-      time: initialData ? initialData.date.toTimeString().split(' ')[0].slice(0, 5) : '',
-      type: initialData?.type || 'Pickup',
-      material: initialData?.material || '',
-      location: initialData?.location || '',
-      status: initialData?.status || 'Pending',
-      notes: initialData?.notes || '',
+      date: initialData ? initialData.date.toISOString().split("T")[0] : "",
+      time: initialData
+        ? initialData.date.toTimeString().split(" ")[0].slice(0, 5)
+        : "",
+      type: initialData?.type || "Pickup",
+      material: initialData?.material || "",
+      location: initialData?.location || "",
+      status: initialData?.status || "Pending",
+      notes: initialData?.notes || "",
     },
-  })
+  });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     const appointment: Appointment = {
@@ -70,22 +76,28 @@ export default function ScheduleForm({ isOpen, onClose, onSubmit, initialData }:
       location: values.location,
       status: values.status,
       notes: values.notes,
-    }
-    onSubmit(appointment)
-    onClose()
-  }
+    };
+    onSubmit(appointment);
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{initialData ? 'Edit Appointment' : 'Schedule New Pickup/Drop-off'}</DialogTitle>
+          <DialogTitle>
+            {initialData ? "Edit Appointment" : "Schedule New Pickup/Drop-off"}
+          </DialogTitle>
           <DialogDescription>
-            Fill out the form below to {initialData ? 'edit your' : 'schedule a new'} pickup or drop-off.
+            Fill out the form below to{" "}
+            {initialData ? "edit your" : "schedule a new"} pickup or drop-off.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4"
+          >
             <FormField
               control={form.control}
               name="date"
@@ -118,7 +130,10 @@ export default function ScheduleForm({ isOpen, onClose, onSubmit, initialData }:
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Type</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select type" />
@@ -165,7 +180,10 @@ export default function ScheduleForm({ isOpen, onClose, onSubmit, initialData }:
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Status</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select status" />
@@ -197,13 +215,15 @@ export default function ScheduleForm({ isOpen, onClose, onSubmit, initialData }:
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-              {initialData ? 'Update Appointment' : 'Schedule Appointment'}
+            <Button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700"
+            >
+              {initialData ? "Update Appointment" : "Schedule Appointment"}
             </Button>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

@@ -42,6 +42,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const logoutUser = useCallback(() => {
+    localStorage.removeItem("authTokens");
+    document.cookie =
+      "auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    setAuthTokens(null);
+    setUser(null);
+    router.push("/login");
+  }, [router]);
+
   const updateToken = useCallback(async () => {
     if (!authTokens?.refresh) {
       setLoading(false);
@@ -74,7 +83,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } finally {
       setLoading(false);
     }
-  }, [authTokens]);
+  }, [authTokens, logoutUser]);
 
   const registerUser = async (userData: UserRegistration) => {
     try {
@@ -154,15 +163,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     }
   };
-
-  const logoutUser = useCallback(() => {
-    localStorage.removeItem("authTokens");
-    document.cookie =
-      "auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    setAuthTokens(null);
-    setUser(null);
-    router.push("/login");
-  }, [router]);
 
   useEffect(() => {
     const storedTokens = localStorage.getItem("authTokens");

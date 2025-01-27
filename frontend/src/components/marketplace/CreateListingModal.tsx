@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -13,60 +12,68 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
+} from "@/components/ui/form";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Material } from '@/app/marketplace/page'
+} from "@/components/ui/select";
+import { Material } from "@/app/marketplace/page";
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Material name must be at least 2 characters.' }),
-  description: z.string().min(10, { message: 'Description must be at least 10 characters.' }),
-  category: z.string().min(1, { message: 'Please select a category.' }),
-  price: z.number().min(0, { message: 'Price must be a positive number.' }),
-  condition: z.enum(['new', 'used']),
-  imageUrl: z.string().url({ message: 'Please enter a valid image URL.' }),
-})
+  name: z
+    .string()
+    .min(2, { message: "Material name must be at least 2 characters." }),
+  description: z
+    .string()
+    .min(10, { message: "Description must be at least 10 characters." }),
+  category: z.string().min(1, { message: "Please select a category." }),
+  price: z.number().min(0, { message: "Price must be a positive number." }),
+  condition: z.enum(["new", "used"]),
+  imageUrl: z.string().url({ message: "Please enter a valid image URL." }),
+});
 
 interface CreateListingModalProps {
-  isOpen: boolean
-  onClose: () => void
-  onCreateListing: (material: Material) => void
+  isOpen: boolean;
+  onClose: () => void;
+  onCreateListing: (material: Material) => void;
 }
 
-export default function CreateListingModal({ isOpen, onClose, onCreateListing }: CreateListingModalProps) {
+export default function CreateListingModal({
+  isOpen,
+  onClose,
+  onCreateListing,
+}: CreateListingModalProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      description: '',
-      category: '',
+      name: "",
+      description: "",
+      category: "",
       price: 0,
-      condition: 'used',
-      imageUrl: '',
+      condition: "used",
+      imageUrl: "",
     },
-  })
+  });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     const newMaterial: Material = {
       id: Date.now().toString(),
       ...values,
-      sellerName: 'Current User', // Replace with actual user name
-    }
-    onCreateListing(newMaterial)
-    form.reset()
-  }
+      sellerName: "Current User", // Replace with actual user name
+    };
+    onCreateListing(newMaterial);
+    form.reset();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -78,7 +85,10 @@ export default function CreateListingModal({ isOpen, onClose, onCreateListing }:
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4"
+          >
             <FormField
               control={form.control}
               name="name"
@@ -111,7 +121,10 @@ export default function CreateListingModal({ isOpen, onClose, onCreateListing }:
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a category" />
@@ -135,7 +148,11 @@ export default function CreateListingModal({ isOpen, onClose, onCreateListing }:
                 <FormItem>
                   <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input type="number" {...field} onChange={e => field.onChange(+e.target.value)} />
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={(e) => field.onChange(+e.target.value)}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -147,7 +164,10 @@ export default function CreateListingModal({ isOpen, onClose, onCreateListing }:
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Condition</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select condition" />
@@ -178,11 +198,15 @@ export default function CreateListingModal({ isOpen, onClose, onCreateListing }:
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">Create Listing</Button>
+            <Button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700"
+            >
+              Create Listing
+            </Button>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

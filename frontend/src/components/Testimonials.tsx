@@ -27,7 +27,9 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <p className="text-green-700 mb-4">"{testimonial.quote}"</p>
+              <p className="text-green-700 mb-4">
+                {'"' + testimonial.quote + '"'}
+              </p>
               <div className="flex items-center">
                 <Image
                   src={testimonial.image || "/placeholder.svg"}

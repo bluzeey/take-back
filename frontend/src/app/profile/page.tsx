@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 // import React, { useEffect, useState } from "react";
 // import axios from "axios"; // Importing axios
 // // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,6 +14,9 @@
 // const BASE_URL = "http://localhost:8000/auth/user/";
 
 // // Base URL for your API
+export default function ProfilePage() {
+  return <div>This is the profile page.</div>;
+}
 // export default function ProfilePage() {
 //   const { user, authTokens } = useAuth();
 //   const [isEditing, setIsEditing] = useState(false);

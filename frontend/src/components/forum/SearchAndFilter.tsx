@@ -1,19 +1,19 @@
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Search } from 'lucide-react'
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 
 interface SearchAndFilterProps {
-  onSearch: (term: string) => void
-  onFilter: (category: string | null) => void
+  onSearch: (term: string) => void;
+  onFilter?: (category: string | null) => void;
 }
 
-export default function SearchAndFilter({ onSearch, onFilter }: SearchAndFilterProps) {
-  const [searchTerm, setSearchTerm] = useState('')
+export default function SearchAndFilter({ onSearch }: SearchAndFilterProps) {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
-    onSearch(searchTerm)
-  }
+    onSearch(searchTerm);
+  };
 
   return (
     <div className="flex space-x-2">
@@ -29,6 +29,5 @@ export default function SearchAndFilter({ onSearch, onFilter }: SearchAndFilterP
       </div>
       <Button onClick={handleSearch}>Search</Button>
     </div>
-  )
+  );
 }
-

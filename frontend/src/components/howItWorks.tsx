@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Search, Filter, MessageSquare, Star } from "lucide-react";
+import { Search, MessageSquare, Star } from "lucide-react";
 
 export default function HowItWorks() {
   return (
