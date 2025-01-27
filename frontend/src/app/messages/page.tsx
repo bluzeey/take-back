@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, MoreVertical, Paperclip, Send } from "lucide-react";
-import Sidebar from "@/components/sidebar";
 
 type Message = {
   id: string;
@@ -84,7 +83,6 @@ export default function MessagesPage() {
 
   return (
     <div className="flex h-screen bg-background">
-      <Sidebar activeTab="Messages" />
       <div className="flex w-full h-screen bg-gray-100">
         {/* Left Column - Conversations List */}
         <div className="w-full md:w-1/3 lg:w-1/4 bg-white border-r">

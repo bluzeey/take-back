@@ -11,7 +11,6 @@ import Notifications from "@/components/forum/Notifications";
 import Guidelines from "@/components/forum/Guidelines";
 import Analytics from "@/components/forum/Analytics";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export interface Thread {
@@ -30,9 +29,10 @@ export default function CommunityForumPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleCreateThread = (newThread: Thread) => {
-    setThreads([newThread, ...threads]);
-  };
+  //TODO: Work on creating threads on the community page.
+  // const handleCreateThread = (newThread: Thread) => {
+  //   setThreads([newThread, ...threads]);
+  // };
 
   const handleUpvote = (threadId: string) => {
     setThreads(

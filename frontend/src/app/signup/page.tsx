@@ -47,13 +47,15 @@ export default function SignUp() {
         alert("Account created successfully!"); // Display success message
         // Optionally, redirect to a different page
       } else {
-        throw new Error(result.errors?.email || "Registration failed"); // Handle errors from registerUser
+        throw new Error(result.errors?.message || "Registration failed"); // Handle errors from registerUser
       }
     } catch (error) {
       console.error("Registration failed:", error);
-      alert(
-        "Failed to create account: " + (error.message || "Unexpected error")
-      );
+      if (error instanceof Error) {
+        alert("Failed to create account: " + error.message);
+      } else {
+        alert("Failed to create account: Unexpected error");
+      }
     }
   };
 

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import {
-  Bell,
-  Home,
-  Search,
-  MessageSquare,
-  Star,
-  User,
-  FileText,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import Sidebar from "@/components/sidebar";
+import React from "react";
+// import {
+//   Bell,
+//   Home,
+//   Search,
+//   MessageSquare,
+//   Star,
+//   User,
+//   FileText,
+// } from "lucide-react";
+// import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+// import { ScrollArea } from "@/components/ui/scroll-area";
+// import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { Badge } from "@/components/ui/badge";
+// import Sidebar from "@/components/sidebar";
 
 export default function RecentActivitySection() {
   const recentActivities = [

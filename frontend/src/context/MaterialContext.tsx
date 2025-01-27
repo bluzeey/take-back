@@ -10,11 +10,11 @@ import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { Material } from "@/lib/definitions";
 
-interface MaterialContextData {
+export interface MaterialContextData {
   materials: Material[];
   loading: boolean;
   fetchMaterials: () => Promise<void>;
-  addMaterial: (materialData: any) => Promise<void>;
+  addMaterial: (materialData: Material) => Promise<void>;
   deleteMaterial: (materialId: string) => Promise<void>;
   updateMaterial: (
     materialId: string,
@@ -22,7 +22,18 @@ interface MaterialContextData {
   ) => Promise<void>;
 }
 
-const MaterialContext = createContext<MaterialContextData | null>(null);
+const defaultMaterialContext: MaterialContextData = {
+  materials: [],
+  loading: false,
+  fetchMaterials: async () => {},
+  addMaterial: async () => {},
+  deleteMaterial: async () => {},
+  updateMaterial: async () => {},
+};
+
+const MaterialContext = createContext<MaterialContextData>(
+  defaultMaterialContext
+);
 
 export const MaterialProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

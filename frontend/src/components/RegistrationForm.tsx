@@ -42,7 +42,7 @@ const formSchema = z
 
 export default function RegistrationForm() {
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const [error, setError] = useState(null); // State for error handling
+  const [error, setError] = useState<string | null>(null); // State for error handling
   const [loading, setLoading] = useState(false);
   const { registerUser } = useAuth();
   const router = useRouter();
@@ -73,13 +73,16 @@ export default function RegistrationForm() {
         router.push("/dashboard"); // Display success message
         // Optionally, redirect to a different page
       } else {
-        throw new Error(result.errors?.email || "Registration failed"); // Handle errors from registerUser
+        throw new Error(result.errors?.message || "Registration failed"); // Handle errors from registerUser
       }
 
       // Optionally reset the form
       form.reset();
-    } catch (error: any) {
-      setError(error.message); // Set the error message to display
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+      // Set the error message to display
     } finally {
       setLoading(false); // Reset loading state
     }
@@ -269,16 +272,4 @@ export default function RegistrationForm() {
       </form>
     </Form>
   );
-}
-function registerUser(arg0: {
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  password: string;
-  password2: string;
-  terms: boolean;
-  newsletter?: boolean | undefined;
-}) {
-  throw new Error("Function not implemented.");
 }

@@ -9,12 +9,14 @@ import {
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Token, User } from "@/lib/definitions";
+import { Token, User, UserRegistration } from "@/lib/definitions";
 
-interface AuthContextData {
-  user: any; // Assuming `user` can be `null`, or define its type if known
+export interface AuthContextData {
+  user: User | null; // Assuming `user` can be `null`, or define its type if known
   authTokens: Token | null;
-  registerUser: (userData: any) => Promise<{ success: boolean; errors?: any }>;
+  registerUser: (
+    userData: UserRegistration
+  ) => Promise<{ success: boolean; errors?: Error | null }>;
   loginUser: (credentials: {
     email: string;
     password: string;
@@ -26,7 +28,7 @@ interface AuthContextData {
 const defaultAuthContext: AuthContextData = {
   user: null, // Assuming `user` can be `null`, or define its type if known
   authTokens: null,
-  registerUser: async () => ({ success: false }), // Default async function
+  registerUser: async () => ({ success: false, errors: null }), // Default async function
   loginUser: async () => {},
   logoutUser: () => {},
   loading: false,
@@ -74,7 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [authTokens]);
 
-  const registerUser = async (userData: User) => {
+  const registerUser = async (userData: UserRegistration) => {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/register/", {
         method: "POST",
@@ -127,21 +129,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         60 * 60 * 24 * 7
       }; SameSite=Strict; Secure`;
       router.push("/");
-    } catch (error: any) {
-      if (error.response) {
-        // Server responded with a status other than 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        alert(error.response.data.detail || "Login failed");
-      } else if (error.request) {
-        // Request made but no response received
-        console.log(error.request);
-        alert("Network error or server did not respond");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // The error is an AxiosError
+        if (error.response) {
+          // Server responded with a status other than 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(error.response.data || "Login failed");
+        } else if (error.request) {
+          // Request made but no response received
+          console.log(error.request);
+          alert("Network error or server did not respond");
+        } else {
+          // Something happened setting up the request
+          console.log("Error", error.message);
+          alert(error.message);
+        }
       } else {
-        // Something happened setting up the request
-        console.log("Error", error.message);
-        alert(error.message);
+        // Handle non-Axios errors
+        console.log("An unexpected error occurred:", error);
+        alert("An unexpected error occurred");
       }
     }
   };

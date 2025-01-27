@@ -10,14 +10,8 @@ import { useMaterials } from "@/context/MaterialContext"; // Import the useMater
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function MaterialManagementPage() {
-  const {
-    materials,
-    loading,
-    fetchMaterials,
-    addMaterial,
-    updateMaterial,
-    deleteMaterial,
-  } = useMaterials();
+  const { materials, loading, fetchMaterials, addMaterial, deleteMaterial } =
+    useMaterials();
 
   useEffect(() => {
     fetchMaterials(); // Fetch materials when the component mounts

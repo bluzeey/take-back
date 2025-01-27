@@ -27,7 +27,8 @@ export default function MarketplacePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isCreateListingOpen, setIsCreateListingOpen] = useState(false);
 
-  const handleSearch = (searchTerm: string, filters: any) => {
+  //TODO: Add filters as a argument to handleSearch
+  const handleSearch = (searchTerm: string) => {
     // Implement search and filter logic here
     const filtered = materials.filter(
       (material) =>

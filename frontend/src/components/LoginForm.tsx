@@ -54,8 +54,8 @@ export default function LoginForm() {
 
       // Redirect to another page after a successful login (e.g., dashboard)
       router.push("/dashboard"); // Change '/dashboard' to the relevant route
-    } catch (error: any) {
-      setError(error.message); // Set the error message to display
+    } catch (error: unknown) {
+      console.log((error as Error).message);
     } finally {
       setLoading(false); // Reset loading state
     }
