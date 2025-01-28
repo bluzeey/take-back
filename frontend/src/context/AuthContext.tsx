@@ -132,15 +132,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const data = response.data; // Access data directly from response
 
       // Assuming 2xx status codes are considered successful
-      console.log(data); // Should print resolved data
-
       setAuthTokens(data);
       setUser(jwtDecode<typeof data.access>(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
       document.cookie = `auth_token=${data.access}; path=/; max-age=${
         60 * 60 * 24 * 7
       }; SameSite=Strict; Secure`;
-      router.push("/");
+      router.push("/dashboard");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         // The error is an AxiosError

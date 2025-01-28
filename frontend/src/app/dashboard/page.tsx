@@ -15,7 +15,7 @@ export default function DashboardPage() {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-green-800 mb-8">
-          Welcome, John Doe!
+          Welcome, {user?.username}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -14,9 +15,11 @@ export default function Hero() {
             and track your recycling impact.
           </p>
           <div className="space-x-4">
-            <Button className="bg-green-700 hover:bg-green-600 text-white">
-              Get Started
-            </Button>
+            <Link href="/login">
+              <Button className="bg-green-700 hover:bg-green-600 text-white">
+                Get Started
+              </Button>
+            </Link>
             <Button
               variant="outline"
               className="text-green-700 border-green-700 hover:bg-green-100"

@@ -39,6 +39,10 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
+    volumes:
+      - ./backend/backend:/app # Mount backend code
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
 
   frontend:
     build:
@@ -46,11 +50,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
+      - ./frontend:/app # Mount frontend code
+      - /app/node_modules # Preserve node_modules
+      - /app/.next # Preserve Next.js build output
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development # Enable development mode
     depends_on:
       - backend
 
